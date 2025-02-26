@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix Clone - Login</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Tela de Login -->
+    <div class="login-container" id="loginScreen">
+        <div class="login-box">
+            <h1>Entrar</h1>
+            <form id="loginForm">
+                <div class="input-group">
+                    <input type="email" id="email" placeholder="Email ou número de telefone" required>
+                    <span class="error-message" id="emailError"></span>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="password" placeholder="Senha" required>
+                    <span class="error-message" id="passwordError"></span>
+                </div>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="rememberMe">
+                    <label for="rememberMe">Lembrar-me</label>
+                </div>
+                <button type="submit" class="login-btn">Entrar</button>
+            </form>
+            <div class="login-footer">
+                <p>Novo por aqui? <a href="#">Assine agora</a>.</p>
+                <p><a href="#">Esqueceu a senha?</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Conteúdo Principal (escondido inicialmente) -->
+    <div class="main-content" id="mainContent" style="display: none;">
+        <div class="welcome-message" id="welcomeMessage">Bem-vindo!</div>
+        <div class="header">
+            <div class="logo">NETFLIX</div>
+            <div class="nav">
+                <a href="#">Início</a>
+                <a href="#">Séries</a>
+                <a href="#">Filmes</a>
+                <a href="#">Documentários</a>
+            </div>
+            <div class="profile">
+                <span id="userName">Usuário</span>
+            </div>
+            <button class="logout-btn" id="logoutBtn">Sair</button>
+        </div>
+
+        <div class="container">
+            <div class="loading" id="loading">Carregando...</div>
+            <div class="section" id="popularSection" style="display: none;">
+                <h2>Filmes Populares</h2>
+                <div class="carousel" id="popularMovies"></div>
+            </div>
+            <div class="section" id="trendingSection" style="display: none;">
+                <h2>Em Alta</h2>
+                <div class="carousel" id="trendingMovies"></div>
+            </div>
+            <div class="section" id="latestSection" style="display: none;">
+                <h2>Lançamentos</h2>
+                <div class="carousel" id="latestMovies"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_KEY = '41fae5abf8f2754672719739749bce98'; // Substitua pela sua chave do TMDB
+        const BASE_URL = 'https://api.themoviedb.org/3';
+        const IMG_URL = 'https://image.tmdb.org/t/p/w500';
+
+        // Função para carregar filmes
+        async function fetchMovies(endpoint, elementId, sectionId) {
+            try {
+                const response = await fetch(`${BASE_URL}${endpoint}?api_key=${API_KEY}&language=pt-BR`);
+                const data = await response.json();
+                displayMovies(data.results, elementId, sectionId);
+            } catch (error) {
+                console.error('Erro ao buscar filmes:', error);
+            }
+        }
+
+        function displayMovies(movies, elementId, sectionId) {
+            const carousel = document.getElementById(elementId);
+            carousel.innerHTML = '';
+            movies.forEach(movie => {
+                const div = document.createElement('div');
+                div.className = 'carousel-item';
+                div.innerHTML = `
+                    <img src="${IMG_URL}${movie.poster_path}" alt="${movie.title}">
+                    <div class="buttons">
+                        <button class="btn">▶ Play</button>
+                        <button class="btn">+ Minha Lista</button>
+                    </div>
+                    <div class="title">${movie.title}</div>
+                `;
+                carousel.appendChild(div);
+            });
+            document.getElementById(sectionId).style.display = 'block';
+            document.getElementById('loading').style.display = 'none';
+        }
+
+        // Validação em tempo real
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const emailError = document.getElementById('emailError');
+        const passwordError = document.getElementById('passwordError');
+
+        emailInput.addEventListener('input', function() {
+            if (!emailInput.value.includes('@') && emailInput.value.length > 0) {
+                emailError.textContent = 'Insira um email válido';
+            } else {
+                emailError.textContent = '';
+            }
+        });
+
+        passwordInput.addEventListener('input', function() {
+            if (passwordInput.value.length < 4 && passwordInput.value.length > 0) {
+                passwordError.textContent = 'A senha deve ter pelo menos 4 caracteres';
+            } else {
+                passwordError.textContent = '';
+            }
+        });
+
+        // Lógica de login
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = emailInput.value;
+            const password = passwordInput.value;
+
+            if (email.includes('@') && password.length >= 4) {
+                document.getElementById('loginScreen').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loginScreen').style.display = 'none';
+                    document.getElementById('mainContent').style.display = 'block';
+                    document.getElementById('mainContent').style.opacity = '1';
+                    
+                    // Mostra mensagem de boas-vindas
+                    const welcome = document.getElementById('welcomeMessage');
+                    welcome.style.display = 'block';
+                    setTimeout(() => welcome.style.opacity = '0', 2000);
+                    setTimeout(() => welcome.style.display = 'none', 3000);
+
+                    // Define nome do usuário (simulado)
+                    document.getElementById('userName').textContent = email.split('@')[0];
+
+                    // Carrega os filmes
+                    document.getElementById('loading').style.display = 'block';
+                    fetchMovies('/movie/popular', 'popularMovies', 'popularSection');
+                    fetchMovies('/trending/movie/week', 'trendingMovies', 'trendingSection');
+                    fetchMovies('/movie/now_playing', 'latestMovies', 'latestSection');
+                }, 500);
+            } else {
+                alert('Por favor, corrija os campos antes de continuar');
+            }
+        });
+
+        // Lógica de logout
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            document.getElementById('mainContent').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('mainContent').style.display = 'none';
+                document.getElementById('loginScreen').style.display = 'flex';
+                document.getElementById('loginScreen').style.opacity = '1';
+                emailInput.value = '';
+                passwordInput.value = '';
+                emailError.textContent = '';
+                passwordError.textContent = '';
+            }, 500);
+        });
+    </script>
+</body>
+</html>

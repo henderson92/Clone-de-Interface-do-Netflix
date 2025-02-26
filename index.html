@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix Clone</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="header">
+        <div class="logo">NETFLIX</div>
+        <div class="nav">
+            <a href="home.html">Início</a>
+            <a href="series.html">Séries</a>
+            <a href="filme.html">Filmes</a>
+            <a href="documentarios.html">Documentários</a>
+            <a href="loguin.html">Entrar</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="section">
+            <h2>Filmes Populares</h2>
+            <div class="carousel" id="popularMovies"></div>
+        </div>
+
+        <div class="section">
+            <h2>Em Alta</h2>
+            <div class="carousel" id="trendingMovies"></div>
+        </div>
+
+        <div class="section">
+            <h2>Lançamentos</h2>
+            <div class="carousel" id="latestMovies"></div>
+        </div>
+    </div>
+
+    <script>
+        const API_KEY = '41fae5abf8f2754672719739749bce98'; // Substitua pela sua chave do TMDB
+        const BASE_URL = 'https://api.themoviedb.org/3';
+        const IMG_URL = 'https://image.tmdb.org/t/p/w500';
+
+        async function fetchMovies(endpoint, elementId) {
+            try {
+                const response = await fetch(`${BASE_URL}${endpoint}?api_key=${API_KEY}&language=pt-BR`);
+                const data = await response.json();
+                displayMovies(data.results, elementId);
+            } catch (error) {
+                console.error('Erro ao buscar filmes:', error);
+            }
+        }
+
+        function displayMovies(movies, elementId) {
+            const carousel = document.getElementById(elementId);
+            carousel.innerHTML = '';
+
+            movies.forEach(movie => {
+                const div = document.createElement('div');
+                div.className = 'carousel-item';
+                div.innerHTML = `
+                    <img src="${IMG_URL}${movie.poster_path}" alt="${movie.title}">
+                    <div class="buttons">
+                        <button class="btn">▶ Play</button>
+                        <button class="btn">+ Minha Lista</button>
+                    </div>
+                    <div class="title">${movie.title}</div>
+                `;
+                carousel.appendChild(div);
+            });
+        }
+
+        window.onload = () => {
+            fetchMovies('/movie/popular', 'popularMovies');
+            fetchMovies('/trending/movie/week', 'trendingMovies');
+            fetchMovies('/movie/now_playing', 'latestMovies');
+        };
+    </script>
+</body>
+</html>

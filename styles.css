@@ -1,0 +1,526 @@
+body {
+    background-color: #141414;
+    color: white;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header */
+.header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    z-index: 1000;
+}
+
+.logo {
+    color: #e50914;
+    font-size: 24px;
+    font-weight: bold;
+    margin-right: 30px;
+}
+
+.nav a {
+    color: white;
+    text-decoration: none;
+    margin-right: 20px;
+    font-size: 16px;
+}
+
+.nav a:hover {
+    color: #b3b3b3;
+}
+
+/* Conteúdo */
+.container {
+    padding: 80px 20px 20px;
+}
+
+.section {
+    margin-bottom: 40px;
+}
+
+.carousel {
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 20px 0;
+}
+
+.carousel-item {
+    display: inline-block;
+    width: 200px;
+    margin-right: 15px;
+    cursor: pointer;
+    transition: transform 0.3s;
+    position: relative;
+}
+
+.carousel-item:hover {
+    transform: scale(1.1);
+}
+
+.carousel-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.title {
+    font-size: 14px;
+    margin: 5px 0;
+    white-space: normal;
+}
+
+.buttons {
+    position: absolute;
+    bottom: 30px;
+    left: 10px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.carousel-item:hover .buttons {
+    opacity: 1;
+}
+
+.btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    margin-right: 5px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.btn:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.carousel::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+    background-color: #141414;
+    color: white;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Tela de Login */
+.login-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-box {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 40px;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.login-box h1 {
+    margin-bottom: 30px;
+    font-size: 32px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 15px;
+    background: #333;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+}
+
+.input-group input::placeholder {
+    color: #8c8c8c;
+}
+
+.login-btn {
+    width: 100%;
+    padding: 15px;
+    background: #e50914;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.login-btn:hover {
+    background: #f40612;
+}
+
+.login-box p {
+    font-size: 14px;
+    color: #8c8c8c;
+}
+
+.login-box a {
+    color: white;
+    text-decoration: none;
+}
+
+.login-box a:hover {
+    text-decoration: underline;
+}
+
+/* Header */
+.header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    z-index: 1000;
+}
+
+.logo {
+    color: #e50914;
+    font-size: 24px;
+    font-weight: bold;
+    margin-right: 30px;
+}
+
+.nav a {
+    color: white;
+    text-decoration: none;
+    margin-right: 20px;
+    font-size: 16px;
+}
+
+.nav a:hover {
+    color: #b3b3b3;
+}
+
+/* Conteúdo Principal */
+.container {
+    padding: 80px 20px 20px;
+}
+
+.section {
+    margin-bottom: 40px;
+}
+
+.carousel {
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 20px 0;
+}
+
+.carousel-item {
+    display: inline-block;
+    width: 200px;
+    margin-right: 15px;
+    cursor: pointer;
+    transition: transform 0.3s;
+    position: relative;
+}
+
+.carousel-item:hover {
+    transform: scale(1.1);
+}
+
+.carousel-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.title {
+    font-size: 14px;
+    margin: 5px 0;
+    white-space: normal;
+}
+
+.buttons {
+    position: absolute;
+    bottom: 30px;
+    left: 10px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.carousel-item:hover .buttons {
+    opacity: 1;
+}
+
+.btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    margin-right: 5px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.btn:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.carousel::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+    background-color: #141414;
+    color: white;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Tela de Login */
+.login-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://assets.nflxext.com/ffe/siteui/vlv3/9f69b3b4-82c5-423f-af92-24874a822da8/4d43066e-3d66-4e79-b0df-4f4e02e6cfde/BR-pt-20240226-popsignuptwoweeks-perspective_alpha_website_large.jpg') no-repeat center center/cover;
+    background-color: rgba(0, 0, 0, 0.6); /* Sobreposição escura */
+    background-blend-mode: overlay;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-box {
+    background: rgba(0, 0, 0, 0.85);
+    padding: 60px 40px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 450px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.login-box h1 {
+    margin-bottom: 40px;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 15px;
+    background: #333;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    transition: border 0.3s;
+}
+
+.input-group input:focus {
+    outline: none;
+    border: 2px solid #e50914;
+}
+
+.input-group input::placeholder {
+    color: #8c8c8c;
+}
+
+.error-message {
+    color: #e87c03;
+    font-size: 12px;
+    position: absolute;
+    bottom: -20px;
+    left: 0;
+}
+
+.checkbox-group {
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+}
+
+.checkbox-group input {
+    margin-right: 10px;
+}
+
+.checkbox-group label {
+    font-size: 14px;
+    color: #b3b3b3;
+}
+
+.login-btn {
+    width: 100%;
+    padding: 15px;
+    background: #e50914;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: background 0.3s;
+}
+
+.login-btn:hover {
+    background: #f40612;
+}
+
+.login-footer p {
+    font-size: 14px;
+    color: #8c8c8c;
+    margin: 10px 0;
+}
+
+.login-footer a {
+    color: white;
+    text-decoration: none;
+}
+
+.login-footer a:hover {
+    text-decoration: underline;
+}
+
+/* Header */
+.header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    z-index: 1000;
+}
+
+.logo {
+    color: #e50914;
+    font-size: 24px;
+    font-weight: bold;
+    margin-right: 30px;
+}
+
+.nav {
+    flex-grow: 1;
+}
+
+.nav a {
+    color: white;
+    text-decoration: none;
+    margin-right: 20px;
+    font-size: 16px;
+}
+
+.nav a:hover {
+    color: #b3b3b3;
+}
+
+.logout-btn {
+    background: #e50914;
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.logout-btn:hover {
+    background: #f40612;
+}
+
+/* Conteúdo Principal */
+.container {
+    padding: 80px 20px 20px;
+}
+
+.section {
+    margin-bottom: 40px;
+}
+
+.carousel {
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 20px 0;
+}
+
+.carousel-item {
+    display: inline-block;
+    width: 200px;
+    margin-right: 15px;
+    cursor: pointer;
+    transition: transform 0.3s;
+    position: relative;
+}
+
+.carousel-item:hover {
+    transform: scale(1.1);
+}
+
+.carousel-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.title {
+    font-size: 14px;
+    margin: 5px 0;
+    white-space: normal;
+}
+
+.buttons {
+    position: absolute;
+    bottom: 30px;
+    left: 10px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.carousel-item:hover .buttons {
+    opacity: 1;
+}
+
+.btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    margin-right: 5px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.btn:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.carousel::-webkit-scrollbar {
+    display: none;
+}

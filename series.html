@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix Clone - Séries</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Conteúdo Principal -->
+    <div class="main-content" id="mainContent">
+        <div class="header">
+            <div class="logo">NETFLIX</div>
+            <div class="nav">
+                <a href="index.html">Início</a>
+                <a href="series.html" class="active">Séries</a>
+                <a href="#">Filmes</a>
+                <a href="#">Documentários</a>
+            </div>
+            <div class="profile">
+                <span id="userName">Usuário</span>
+            </div>
+            <button class="logout-btn" id="logoutBtn">Sair</button>
+        </div>
+
+        <div class="container">
+            <div class="loading" id="loading">Carregando...</div>
+            <div class="section" id="popularSection" style="display: none;">
+                <h2>Séries Populares</h2>
+                <div class="carousel" id="popularSeries"></div>
+            </div>
+            <div class="section" id="trendingSection" style="display: none;">
+                <h2>Séries em Alta</h2>
+                <div class="carousel" id="trendingSeries"></div>
+            </div>
+            <div class="section" id="latestSection" style="display: none;">
+                <h2>Lançamentos de Séries</h2>
+                <div class="carousel" id="latestSeries"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_KEY = 'SUA_CHAVE_API_AQUI'; // Substitua pela sua chave do TMDB
+        const BASE_URL = 'https://api.themoviedb.org/3';
+        const IMG_URL = 'https://image.tmdb.org/t/p/w500';
+
+        // Função para carregar séries
+        async function fetchSeries(endpoint, elementId, sectionId) {
+            try {
+                const response = await fetch(`${BASE_URL}${endpoint}?api_key=${API_KEY}&language=pt-BR`);
+                const data = await response.json();
+                displaySeries(data.results, elementId, sectionId);
+            } catch (error) {
+                console.error('Erro ao buscar séries:', error);
+            }
+        }
+
+        function displaySeries(series, elementId, sectionId) {
+            const carousel = document.getElementById(elementId);
+            carousel.innerHTML = '';
+            series.forEach(show => {
+                const div = document.createElement('div');
+                div.className = 'carousel-item';
+                div.innerHTML = `
+                    <img src="${IMG_URL}${series.poster_path}" alt="${series.name}">
+                    <div class="buttons">
+                        <button class="btn">▶ Play</button>
+                        <button class="btn">+ Minha Lista</button>
+                    </div>
+                    <div class="title">${series.name}</div>
+                `;
+                carousel.appendChild(div);
+            });
+            document.getElementById(sectionId).style.display = 'block';
+            document.getElementById('loading').style.display = 'none';
+        }
+
+        // Carregar séries ao abrir a página
+        window.onload = function() {
+            const userName = localStorage.getItem('userName') || 'Usuário';
+            document.getElementById('userName').textContent = userName;
+
+            document.getElementById('loading').style.display = 'block';
+            fetchSeries('/tv/popular', 'popularSeries', 'popularSection');
+            fetchSeries('/trending/tv/week', 'trendingSeries', 'trendingSection');
+            fetchSeries('/tv/on_the_air', 'latestSeries', 'latestSection');
+        };
+
+        // Lógica de logout
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            document.getElementById('mainContent').style.opacity = '0';
+            setTimeout(() => {
+                window.location.href = 'index.html'; // Volta para a tela de login
+            }, 500);
+        });
+    </script>
+</body>
+</html>
