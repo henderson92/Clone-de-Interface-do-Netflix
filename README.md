@@ -1,4 +1,4 @@
-Funcionalidades
+** Funcionalidades
 Tela de Login e Cadastro:
 Login com validação de email e senha.
 Cadastro com confirmação de senha.
